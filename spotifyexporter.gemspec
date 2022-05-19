@@ -4,7 +4,7 @@ require_relative "lib/spotifyexporter/version"
 
 Gem::Specification.new do |spec|
   spec.name = "spotifyexporter"
-  spec.version = Spotifyexporter::VERSION
+  spec.version = SpotifyExporter::VERSION
   spec.authors = ["aquaflamingo"]
   spec.email = ["16901597+aquaflamingo@users.noreply.github.com"]
 
@@ -32,7 +32,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "rspotify", "~> 1.0"
+  spec.add_development_dependency "pry", "~> 1.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
