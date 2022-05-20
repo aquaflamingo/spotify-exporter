@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'fileutils'
-require 'yaml'
-require 'singleton'
-require 'pry'
+require "fileutils"
+require "yaml"
+require "singleton"
+require "pry"
 
 module SpotifyExporter
   class AppConfig
@@ -23,10 +23,11 @@ module SpotifyExporter
     end
 
     def self.new_empty
-      new("","")
+      new("", "")
     end
 
     private
+
     def to_h
       { spotify_client_id: @spotify_client_id, spotify_client_secret: @spotify_client_secret }
     end
@@ -43,7 +44,7 @@ module SpotifyExporter
 
     def save_auth(client_id:, secret:)
       load_config_file unless config_loaded?
-        
+
       @app_config.spotify_client_id = client_id
       @app_config.spotify_client_secret = secret
 
@@ -52,8 +53,8 @@ module SpotifyExporter
 
     private
 
-    # 
-    # Saves the currently 
+    #
+    # Saves the currently
     def save_config!
       File.open(config_file_path, "w") do |f|
         f.puts @app_config.to_yaml
@@ -72,7 +73,7 @@ module SpotifyExporter
       @config_file_path ||= File.join(config_dir_path, FILE_CLI_CONFIG)
     end
 
-    # 
+    #
     # Loads the Configuration object
     #
     def load_config_file
@@ -80,22 +81,22 @@ module SpotifyExporter
 
       config_yaml = YAML.load_file(config_file_path)
 
-      if config_yaml.nil?
-        @app_config = AppConfig.new_empty 
-      else
-        @app_config = AppConfig.new(config_yaml['spotify_client_id'], config_yaml['spotify_client_secret'])
-      end
+      @app_config = if config_yaml.nil?
+                      AppConfig.new_empty
+                    else
+                      AppConfig.new(config_yaml["spotify_client_id"], config_yaml["spotify_client_secret"])
+                    end
     end
 
     def config_file_exists?
       return false unless File.exist? config_file_path
     end
 
-    # 
+    #
     # Initializes the configuration directory if non exists
     #
     def initialize_config_file
-      FileUtils.mkdir_p(config_dir_path) unless Dir.exist? config_dir_path 
+      FileUtils.mkdir_p(config_dir_path) unless Dir.exist? config_dir_path
 
       FileUtils.touch(config_file_path) unless File.exist? config_file_path
     end

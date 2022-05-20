@@ -24,7 +24,6 @@ module SpotifyExporter
       puts SpotifyExporter::VERSION
     end
 
-
     desc "auth", "Authorizes the CLI with Spotify API"
     def auth
       workflow = AuthWorkflow.new
