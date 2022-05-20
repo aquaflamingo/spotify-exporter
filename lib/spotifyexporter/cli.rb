@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "version"
-require_relative "command/config.rb"
 require "thor"
+require_relative "version"
+require_relative "command/auth"
 
 module SpotifyExporter
   #
@@ -25,7 +25,10 @@ module SpotifyExporter
     end
 
 
-    desc "config", "Modifies CLI configuration"
-    subcommand :config, ConfigCommand
+    desc "auth", "Authorizes the CLI with Spotify API"
+    def auth
+      workflow = AuthWorkflow.new
+      workflow.start
+    end
   end
 end
