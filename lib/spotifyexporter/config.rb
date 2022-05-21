@@ -4,8 +4,15 @@ require "fileutils"
 require "yaml"
 require "singleton"
 require "pry"
+require_relative './lib/injectable.rb'
 
 module SpotifyExporter
+  module ConfigDependant
+    include Injectable
+
+    inject :config, -> { ConfigManager.instance.config } 
+  end
+
   class AppConfig
     attr_accessor :spotify_client_id, :spotify_client_secret
 
@@ -18,7 +25,7 @@ module SpotifyExporter
       to_h.to_yaml
     end
 
-    def has_credentials?
+    def credentials?
       !@spotify_client_secret.nil? && !@spotify_client_id.nil?
     end
 
@@ -42,7 +49,12 @@ module SpotifyExporter
 
     FILE_CLI_CONFIG = "config.yml"
 
-    def save_auth(client_id:, secret:)
+    # 
+    # Loads and saves the credentials to the main configuration
+    #
+    # @return [Boolean]
+    #
+    def save_credentials(client_id:, secret:)
       load_config_file unless config_loaded?
 
       @app_config.spotify_client_id = client_id
@@ -51,14 +63,30 @@ module SpotifyExporter
       save_config!
     end
 
+    # 
+    # Retrieves the AppConfig
+    #
+    # @return [AppConfig]
+    #
+    def config
+      load_config_file unless config_loaded?
+
+      @app_config
+    end
+
     private
 
     #
-    # Saves the currently
+    # Saves the currently in-memory configuration
+    # 
+    # @return success [Boolean]
+    #
     def save_config!
       File.open(config_file_path, "w") do |f|
         f.puts @app_config.to_yaml
       end
+
+      true
     end
 
     def config_loaded?
@@ -74,7 +102,7 @@ module SpotifyExporter
     end
 
     #
-    # Loads the Configuration object
+    # Reads the user file system configurations into the in-memory AppConfig 
     #
     def load_config_file
       initialize_config_file unless config_file_exists?
@@ -84,7 +112,7 @@ module SpotifyExporter
       @app_config = if config_yaml.nil?
                       AppConfig.new_empty
                     else
-                      AppConfig.new(config_yaml["spotify_client_id"], config_yaml["spotify_client_secret"])
+                      AppConfig.new(config_yaml[:spotify_client_id], config_yaml[:spotify_client_secret])
                     end
     end
 

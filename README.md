@@ -2,6 +2,8 @@
 
 Export Spotify Playlists
 
+Currently only supports Ruby < 2.7
+
 ## Installation
 
 Add this line to your application's Gemfile:

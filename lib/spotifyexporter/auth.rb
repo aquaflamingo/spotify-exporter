@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 require "tty-prompt"
-require_relative "../config"
+require_relative "./config"
 
 module SpotifyExporter
   class AuthWorkflow
+
+    # 
+    # Starts auth flow 
+    #
     def start
       auth = prompt_for_auth
 
-      ConfigManager.instance.save_auth(
+      ConfigManager.instance.save_credentials(
         client_id: auth[:spotify_client_id],
         secret: auth[:spotify_client_secret]
       )

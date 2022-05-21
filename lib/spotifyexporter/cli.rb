@@ -2,11 +2,12 @@
 
 require "thor"
 require_relative "version"
-require_relative "command/auth"
+require_relative "command/playlists"
+require_relative "auth"
 
 module SpotifyExporter
   #
-  # The CLI devlogs CLI
+  # The CLI spotify exporter
   #
   class CLI < Thor
     package_name "spotifyexporter"
@@ -29,5 +30,8 @@ module SpotifyExporter
       workflow = AuthWorkflow.new
       workflow.start
     end
+
+    desc "playlists", "List playlists"
+    subcommand 'playlists', Playlists
   end
 end
