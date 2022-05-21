@@ -22,7 +22,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+You will need to authenticate the CLI before you can use it.
+
+You can generate a Spotify API Key at: https://developer.spotify.com/dashboard/applications/6b96bdf7b9224f109aa65ebda1429522
+
+After you have an API Key available, run the `auth` command and enter your credentials:
+
+```bash
+
+spotifyexporter auth
+
+```
+
+The CLI will persist these credentials on your file system within the `.config` directory.
+
+Next, you can run the `export` command to get a full list of songs in each playlist for a particular user.
+
+```bash
+
+# Create an output directory
+mkdir output_dir
+
+spotifyexporter export -u username -o output_dir
+```
 
 ## Development
 
