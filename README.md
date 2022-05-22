@@ -1,8 +1,6 @@
 # SpotifyExporter
 
-Export Spotify Playlists
-
-Currently only supports Ruby < 2.7
+Export or backup your Spotify playlists
 
 ## Installation
 
@@ -24,7 +22,7 @@ Or install it yourself as:
 
 You will need to authenticate the CLI before you can use it.
 
-You can generate a Spotify API Key at: https://developer.spotify.com/dashboard/applications/6b96bdf7b9224f109aa65ebda1429522
+You can generate a Spotify API Key at: https://developer.spotify.com/dashboard/applications
 
 After you have an API Key available, run the `auth` command and enter your credentials:
 
