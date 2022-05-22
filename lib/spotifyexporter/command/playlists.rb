@@ -120,6 +120,7 @@ module SpotifyExporter
         Title: #{playlist.title}
         Creator: #{playlist.creator}
         Description: #{playlist.description}
+        Image: #{playlist.image}
 
         ---
 
@@ -143,7 +144,8 @@ module SpotifyExporter
         title: playlist.title,
         creator: playlist.creator,
         description: playlist.description,
-        tracks: tracks
+        image: playlist.image,
+        tracks: tracks,
       }.to_yaml
     end
 
