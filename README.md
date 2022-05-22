@@ -43,7 +43,8 @@ Next, you can run the `export` command to get a full list of songs in each playl
 # Create an output directory
 mkdir output_dir
 
-spotifyexporter export -u username -o output_dir
+# Run the export command for username "djkoze", generate playlists in .m3u format
+spotifyexporter export -u djkoze -o output_dir -f m3u
 ```
 
 ## Development
