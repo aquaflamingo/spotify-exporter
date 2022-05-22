@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rspotify", "~> 2.1.1"
-  spec.add_dependency "addressable", "~> 2.8.0"
+  spec.add_dependency "playlist", "~> 1.2.0"
   spec.add_dependency "thor", "~> 1.2.1"
   spec.add_dependency "tty-prompt", "~> 0.23.1"
 
