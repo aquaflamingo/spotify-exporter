@@ -32,6 +32,6 @@ module SpotifyExporter
     end
 
     desc "playlists", "List playlists"
-    subcommand 'playlists', Playlists
+    subcommand "playlists", Playlists
   end
 end

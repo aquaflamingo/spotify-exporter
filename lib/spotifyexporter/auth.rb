@@ -5,9 +5,8 @@ require_relative "./config"
 
 module SpotifyExporter
   class AuthWorkflow
-
-    # 
-    # Starts auth flow 
+    #
+    # Starts auth flow
     #
     def start
       auth = prompt_for_auth
