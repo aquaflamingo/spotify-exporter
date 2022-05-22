@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spotifyexporter (0.1.0)
+    spotifyexporter (0.2.0)
       playlist (~> 1.2.0)
       rspotify (~> 2.11.1)
       thor (~> 1.2.1)

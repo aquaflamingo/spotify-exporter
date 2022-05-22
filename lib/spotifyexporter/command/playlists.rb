@@ -58,7 +58,7 @@ module SpotifyExporter
         # add it to the playlist.
         spotify_pl.tracks.each do |spotify_track|
           track = Playlist::Track.new(
-            title: spotify_track.name, 
+            title: spotify_track.name,
             duration: spotify_track.duration_ms
           )
 
@@ -117,13 +117,13 @@ module SpotifyExporter
     #
     def generate_txt_playlist(playlist)
       <<~EOF
-      Title: #{playlist.title}
-      Creator: #{playlist.creator}
-      Description: #{playlist.description}
+        Title: #{playlist.title}
+        Creator: #{playlist.creator}
+        Description: #{playlist.description}
 
-      ---
+        ---
 
-      #{playlist.tracks.map {|t| "#{t.artist} - #{t.title}"}.join("\n")}
+        #{playlist.tracks.map { |t| "#{t.artist} - #{t.title}" }.join("\n")}
 
       EOF
     end
