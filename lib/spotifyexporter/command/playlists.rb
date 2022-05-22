@@ -10,7 +10,7 @@ module SpotifyExporter
   class Playlists < Thor
     include ConfigDependant
 
-    SUPPORTED_PLAYLIST_FORMATS = %w[m3u pls xspf txt].freeze
+    SUPPORTED_PLAYLIST_FORMATS = %w[m3u pls xspf txt yml].freeze
 
     desc "ls", "Lists playlist"
     option :user, required: true, aliases: "-u"
@@ -101,9 +101,11 @@ module SpotifyExporter
                                     Playlist::Format::PLS.generate(playlist)
                                   when :xspf
                                     Playlist::Format::XSPF.generate(playlist)
+                                  when :yml
+                                    generate_yml_playlist(playlist)
                                   else
                                     # Use default generation
-                                    generate_basic_playlist(playlist)
+                                    generate_txt_playlist(playlist)
                                   end
 
         f.write generated_playlist_blob
@@ -111,12 +113,28 @@ module SpotifyExporter
     end
 
     #
-    # Creates a basic playlist file
+    # Creates a txt playlist blob
+    #
+    def generate_txt_playlist(playlist)
+      <<~EOF
+      Title: #{playlist.title}
+      Creator: #{playlist.creator}
+      Description: #{playlist.description}
+
+      ---
+
+      #{playlist.tracks.map {|t| "#{t.artist} - #{t.title}"}.join("\n")}
+
+      EOF
+    end
+
+    #
+    # Creates a yaml playlist blob
     #
     # @param playlist [Playlist]
     # @return [YAML]
     #
-    def generate_basic_playlist(playlist)
+    def generate_yml_playlist(playlist)
       tracks = playlist.tracks.map do |t|
         { artist: t.artist, title: t.title }
       end
