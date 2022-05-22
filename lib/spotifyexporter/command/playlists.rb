@@ -57,7 +57,10 @@ module SpotifyExporter
         # create a new playlist track with title and contributors, then
         # add it to the playlist.
         spotify_pl.tracks.each do |spotify_track|
-          track = Playlist::Track.new(title: spotify_track.name)
+          track = Playlist::Track.new(
+            title: spotify_track.name, 
+            duration: spotify_track.duration_ms
+          )
 
           spotify_track.artists.each do |artist|
             track.add_contributor(name: artist.name)
