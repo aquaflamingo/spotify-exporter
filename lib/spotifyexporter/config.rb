@@ -4,13 +4,13 @@ require "fileutils"
 require "yaml"
 require "singleton"
 require "pry"
-require_relative './lib/injectable.rb'
+require_relative "./lib/injectable"
 
 module SpotifyExporter
   module ConfigDependant
     include Injectable
 
-    inject :config, -> { ConfigManager.instance.config } 
+    inject :config, -> { ConfigManager.instance.config }
   end
 
   class AppConfig
@@ -49,7 +49,7 @@ module SpotifyExporter
 
     FILE_CLI_CONFIG = "config.yml"
 
-    # 
+    #
     # Loads and saves the credentials to the main configuration
     #
     # @return [Boolean]
@@ -63,7 +63,7 @@ module SpotifyExporter
       save_config!
     end
 
-    # 
+    #
     # Retrieves the AppConfig
     #
     # @return [AppConfig]
@@ -78,7 +78,7 @@ module SpotifyExporter
 
     #
     # Saves the currently in-memory configuration
-    # 
+    #
     # @return success [Boolean]
     #
     def save_config!
@@ -102,7 +102,7 @@ module SpotifyExporter
     end
 
     #
-    # Reads the user file system configurations into the in-memory AppConfig 
+    # Reads the user file system configurations into the in-memory AppConfig
     #
     def load_config_file
       initialize_config_file unless config_file_exists?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpotifyExporter
   module Injectable
     def self.included(base)

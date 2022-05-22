@@ -43,7 +43,7 @@ module SpotifyExporter
       spotify_playlists.each do |spotify_pl|
         # Remove non-alphanumeric characters
         # Replace all spaces with underscores
-        sanitized_name = spotify_pl.name.gsub(/[^[:alnum:]^[:space:]]/, "").trim
+        sanitized_name = spotify_pl.name.gsub(/[^[:alnum:]^[:space:]]/, "").chomp
 
         playlist = Playlist.new(
           title: sanitized_name,
