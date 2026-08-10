@@ -1,3 +1,5 @@
+
+
 # SpotifyExporter
 
 Export or backup your Spotify playlists
@@ -42,7 +44,7 @@ Next, you can run the `export` command to get a full list of songs in each playl
 mkdir output_dir
 
 # Run the export command for username "djkoze", generate playlists in .m3u format
-spotifyexporter export -u djkoze -o output_dir -f m3u
+spotifyexporter playlists export -u djkoze -o output_dir -f m3u
 ```
 
 ## Development
